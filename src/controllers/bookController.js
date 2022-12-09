@@ -78,6 +78,32 @@ const createBook = async function (req, res) {
   }
 };
 
+
+// creating teting API to get ALL book list on frontend
+
+const ShowBookList = async (req, res) => {
+  try {
+
+    const bookdetail = await bookModel.find()
+
+    if (bookdetail.length == 0)
+      return res
+        .status(404)
+        .send({ status: false, message: "Your Book List is empty" });
+
+    return res
+      .status(200)
+      .send({ status: true, message: "Book List", data: bookdetail });
+
+  } catch (err) {
+    return res.status(500).send({ status: false, message: err.message });
+  }
+}
+
+
+
+
+
 //get API for book with Query param//
 const getBook = async function (req, res) {
   try {
@@ -159,14 +185,14 @@ const getBookByPathParam = async function (req, res) {
       }
     }
 
-    const bookRequested = await bookModel.findOne({_id:bookId,isDeleted:false});
+    const bookRequested = await bookModel.findOne({ _id: bookId, isDeleted: false });
 
     if (!bookRequested)
       return res
         .status(404)
         .send({ status: false, message: "no book with this id found" });
 
-    const reviewsForBook = await reviewModel.find({ bookId: bookId, isDeleted:false }).select(["-createdAt", "-updatedAt", "-__v", "-isDeleted"]);
+    const reviewsForBook = await reviewModel.find({ bookId: bookId, isDeleted: false }).select(["-createdAt", "-updatedAt", "-__v", "-isDeleted"]);
 
     const newdata = {
       ...bookRequested._doc,
@@ -256,3 +282,4 @@ module.exports.getBook = getBook;
 module.exports.getBookByPathParam = getBookByPathParam;
 module.exports.updateBook = updateBook;
 module.exports.delBook = delBook;
+module.exports.ShowBookList = ShowBookList

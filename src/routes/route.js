@@ -26,9 +26,9 @@ const middleware = require ("../middleware/auth")
 
 
 router.post('/create-book',bookController.createBook)
-router.get ('/',bookController.getBook)
+router.get ('/',bookController.ShowBookList)
 router.get ('/show-book/:id',bookController.getBookByPathParam)
-router.put('/books/:bookId',bookController.updateBook)
+router.put('/edit-book/:id',bookController.updateBook)
 
 
 router.delete("/books/:bookId",bookController.delBook)

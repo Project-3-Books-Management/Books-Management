@@ -10,9 +10,9 @@ class App extends Component {
     return (
       <Router>
         <Routes>
-          <Route path='/' element={<ShowBookList/>} />
-          <Route path='/create-book' element={<CreateBook/>}/>
-          <Route path='/books/:bookId' element={<UpdateBookInfo/>} />
+        <Route exact path='/' element={<ShowBookList/>} />
+          <Route path='/create-book' element={<CreateBook/>} />
+          <Route path='/edit-book/:id' element={<UpdateBookInfo/>} />
           <Route path='/show-book/:id' element={<ShowBookDetails/>} />
         </Routes>
       </Router>

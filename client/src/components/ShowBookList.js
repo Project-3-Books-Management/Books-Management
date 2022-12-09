@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import BookCard from './BookCard';
+//import BookCard from './BookCard';
 
 class ShowBookList extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class ShowBookList extends Component {
 
   componentDidMount() {
     axios
-      .get('/')
+      .get('http://localhost:5000/')
       .then(res => {
         this.setState({
           books: res.data
@@ -28,18 +28,20 @@ class ShowBookList extends Component {
 
 
   render() {
-    const books = Array.from(this.state.books);
-    console.log("PrintBook: " + books);
-    let bookList;
+    const books =this.state.books
+  
+    let bookList ;
 
     if(!books) {
       bookList = "there is no book record!";
     } else {
-      bookList = books.map((book, k) =>
-        <BookCard book={book} key={k} />
+      bookList = [books].map((book, k) =>
+      console.log(book.data),
+        //<BookCard book={book} key={k} />
+      
       );
     }
-
+    //console.log("PrintBook: " + books.data);
     return (
       <div className="ShowBookList">
         <div className="container">
@@ -62,6 +64,8 @@ class ShowBookList extends Component {
 
           <div className="list">
                 {bookList}
+                {console.log(bookList)}
+                
           </div>
         </div>
       </div>
