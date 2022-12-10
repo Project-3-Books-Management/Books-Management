@@ -38,7 +38,7 @@ class ShowBookList extends Component {
 
      
      bookList = books.map((book,k)=>//console.log(":" + book.title)
-      <BookCard key={book._id} book=<h2>{book.title} <br/> {book.excerpt} <br/> {book.userId} <br/> {book.ISBN}<br/> {book.category}<br/> {book.subcategory}<br/> {book.reviews}</h2>  />
+      <BookCard key={book._id} book=<h2>{book._id} <br/>{book.title} <br/> {book.excerpt} <br/> {book.userId} <br/> {book.ISBN}<br/> {book.category}<br/> {book.subcategory}<br/> {book.reviews}</h2>  />
       
     )
     }
