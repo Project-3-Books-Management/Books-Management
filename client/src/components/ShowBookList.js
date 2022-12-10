@@ -2,22 +2,22 @@ import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-//import BookCard from './BookCard';
+import BookCard from './BookCard';
 
 class ShowBookList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: []
+    books: []
     };
   }
 
   componentDidMount() {
     axios
-      .get('http://localhost:5000/')
-      .then(res => {
+      .get('http://localhost:5000')
+      .then(res => { 
         this.setState({
-          books: res.data
+          books: res.data.data
           
         })
       })
@@ -28,20 +28,21 @@ class ShowBookList extends Component {
 
 
   render() {
-    const books =this.state.books
-  
+    const books=this.state.books
+    console.log("PrintBook: " + books);
     let bookList ;
 
     if(!books) {
       bookList = "there is no book record!";
-    } else {
-      bookList = [books].map((book, k) =>
-      console.log(book.data),
-        //<BookCard book={book} key={k} />
+    } else { 
+
+     
+     bookList = books.map((book,k)=>//console.log(":" + book.title)
+      <BookCard key={book._id} book=<h2>{book.title} <br/> {book.excerpt} <br/> {book.userId} <br/> {book.ISBN}<br/> {book.category}<br/> {book.subcategory}<br/> {book.reviews}</h2>  />
       
-      );
+    )
     }
-    //console.log("PrintBook: " + books.data);
+    //console.log("PrintBook: " + books);
     return (
       <div className="ShowBookList">
         <div className="container">
@@ -64,7 +65,7 @@ class ShowBookList extends Component {
 
           <div className="list">
                 {bookList}
-                {console.log(bookList)}
+                {/* {console.log(bookList)} */}
                 
           </div>
         </div>

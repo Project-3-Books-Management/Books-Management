@@ -59,11 +59,11 @@ const createBook = async function (req, res) {
       return res
         .status(400)
         .send({ status: false, message: "please provide releasedAt" });
-    const dateRegex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
+    const dateRegex =/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/              ///^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;"YYYY-MM-DD"
     if (!dateRegex.test(releasedAt)) {
       return res.status(400).send({
         status: false,
-        message: `Release date must be in "YYYY-MM-DD" format only And a "Valid Date"`,
+        message: `Release date must be in "dd/mm/yyyy" format only And a "Valid Date"`,
       });
     }
 
