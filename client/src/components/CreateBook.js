@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,Navigate } from 'react-router-dom';
 
 import '../App.css';
 import axios from 'axios';
@@ -40,7 +40,7 @@ class CreateBook extends Component {
     };
 console.log(data)
     axios
-      .post('http://localhost:5000/create-book', data)
+      .post('http://localhost:5000/create-book', {data,Headers:{"Content-Type":"application/json"}})
       .then(res => {
         this.setState({
           title: '',
@@ -52,7 +52,7 @@ console.log(data)
           reviews :'',
           releasedAt :''
         })
-        this.props.history.forword('/');
+        Navigate('http://localhost:5000');
       })
       .catch(err => {
         console.log("Error in CreateBook!"+ err);
