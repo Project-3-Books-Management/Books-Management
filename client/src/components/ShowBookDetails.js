@@ -8,13 +8,15 @@ class showBookDetails extends Component {
     super(props);
     this.state = {
       book: {}
+      
     };
   }
 
   componentDidMount() {
+
     // console.log("Print id: " + this.props.match.params.id);
     axios
-      .get('http://localhost:5000/show-book/'+this.props.match.params.id)
+      .get(`http://localhost:5000/show-book/`+this.props.match.params.bookId)
       .then(res => {
         // console.log("Print-showBookDetails-API-response: " + res.data);
         this.setState({
@@ -26,9 +28,9 @@ class showBookDetails extends Component {
       })
   };
 
-  onDeleteClick (id) {
+  onDeleteClick (bookId) {
     axios
-      .delete('http://localhost:5000/show-book/'+id)
+      .delete('http://localhost:5000/show-book/'+bookId)
       .then(res => {
         this.props.history.push("/");
       })
@@ -41,6 +43,7 @@ class showBookDetails extends Component {
   render() {
 
     const book = this.state.book;
+    
     let BookItem = <div>
       <table className="table table-hover table-dark">
         {/* <thead>
@@ -59,28 +62,39 @@ class showBookDetails extends Component {
           </tr>
           <tr>
             <th scope="row">2</th>
-            <td>Author</td>
-            <td>{ book.author }</td>
+            <td>Excerpt</td>
+            <td>{ book.excerpt }</td>
           </tr>
           <tr>
             <th scope="row">3</th>
-            <td>ISBN</td>
-            <td>{ book.isbn }</td>
+            <td>User Id</td>
+            <td>{ book.userId }</td>
           </tr>
           <tr>
             <th scope="row">4</th>
-            <td>Publisher</td>
-            <td>{ book.publisher }</td>
+            <td>ISBN</td>
+            <td>{ book.ISBN }</td>
           </tr>
           <tr>
             <th scope="row">5</th>
-            <td>Published Date</td>
-            <td>{ book.published_date }</td>
+            <td>category</td>
+            <td>{ book.category }</td>
           </tr>
           <tr>
             <th scope="row">6</th>
-            <td>Description</td>
-            <td>{ book.description }</td>
+            <td>subcategory</td>
+            <td>{ book.subcategory }</td>
+          </tr>
+
+          <tr>
+            <th scope="row">7</th>
+            <td>reviews</td>
+            <td>{ book.reviews }</td>
+          </tr>
+          <tr>
+            <th scope="row">8</th>
+            <td>releasedAt</td>
+            <td>{ book.releasedAt }</td>
           </tr>
         </tbody>
       </table>
@@ -132,4 +146,4 @@ class showBookDetails extends Component {
   }
 }
 
-export default showBookDetails;
+export default showBookDetails

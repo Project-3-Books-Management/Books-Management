@@ -8,27 +8,31 @@ class UpdateBookInfo extends Component {
     super(props);
     this.state = {
       title: '',
-      isbn: '',
-      author: '',
-      description: '',
-      published_date: '',
-      publisher: ''
+      excerpt: '',
+      userId: '',
+      ISBN: '',
+      category: '',
+      subcategory: '',
+      reviews:'',
+      releasedAt : ''
     };
   }
 
   componentDidMount() {
     // console.log("Print id: " + this.props.match.params.id);
     axios
-      .get('http://localhost:8082/api/books/'+this.props.match.params.id)
+      .get('http://localhost:5000/edit-book/'+this.props.match.params.bookId)
       .then(res => {
         // this.setState({...this.state, book: res.data})
         this.setState({
-          title: res.data.title,
-          isbn: res.data.isbn,
-          author: res.data.author,
-          description: res.data.description,
-          published_date: res.data.published_date,
-          publisher: res.data.publisher
+          title: this.state.title,
+          excerpt: this.state.excerpt,
+          userId: this.state.userId,
+          ISBN: this.state.ISBN,
+          category: this.state.category,
+          subcategory: this.state.subcategory,
+          reviews: this.state.reviews,
+          releasedAt: this.state.releasedAt
         })
       })
       .catch(err => {
@@ -45,17 +49,19 @@ class UpdateBookInfo extends Component {
 
     const data = {
       title: this.state.title,
-      isbn: this.state.isbn,
-      author: this.state.author,
-      description: this.state.description,
-      published_date: this.state.published_date,
-      publisher: this.state.publisher
+      excerpt: this.state.excerpt,
+      userId: this.state.userId,
+      ISBN: this.state.ISBN,
+      category: this.state.category,
+      subcategory: this.state.subcategory,
+      reviews: this.state.reviews,
+      releasedAt: this.state.releasedAt
     };
 
     axios
-      .put('http://localhost:8082/api/books/'+this.props.match.params.id, data)
+      .put('http://localhost:5000/edit-book/'+this.props.params.bookId, data)
       .then(res => {
-        this.props.history.push('/show-book/'+this.props.match.params.id);
+        this.props.history.push('/show-book/'+this.props.params.bookId);
       })
       .catch(err => {
         console.log("Error in UpdateBookInfo!");
@@ -98,60 +104,83 @@ class UpdateBookInfo extends Component {
             <br />
 
             <div className='form-group'>
-            <label htmlFor="isbn">ISBN</label>
+            <label htmlFor="excerpt">excerpt</label>
               <input
                 type='text'
-                placeholder='ISBN'
-                name='isbn'
+                placeholder='excerpt'
+                name='excerpt'
                 className='form-control'
-                value={this.state.isbn}
+                value={this.state.excerpt}
                 onChange={this.onChange}
               />
             </div>
 
             <div className='form-group'>
-            <label htmlFor="author">Author</label>
+            <label htmlFor="userId">userId</label>
               <input
                 type='text'
-                placeholder='Author'
-                name='author'
+                placeholder='userId'
+                name='userId'
                 className='form-control'
-                value={this.state.author}
+                value={this.state.userId}
                 onChange={this.onChange}
               />
             </div>
 
             <div className='form-group'>
-            <label htmlFor="description">Description</label>
+            <label htmlFor="ISBN">ISBN</label>
               <input
                 type='text'
                 placeholder='Describe this book'
-                name='description'
+                name='ISBN'
                 className='form-control'
-                value={this.state.description}
+                value={this.state.ISBN}
                 onChange={this.onChange}
               />
             </div>
 
             <div className='form-group'>
-            <label htmlFor="published_date">Published Date</label>
+            <label htmlFor="category">Category</label>
               <input
                 type='date'
-                placeholder='published_date'
-                name='published_date'
+                placeholder='category'
+                name='category'
                 className='form-control'
-                value={this.state.published_date}
+                value={this.state.category}
                 onChange={this.onChange}
               />
             </div>
             <div className='form-group'>
-            <label htmlFor="publisher">Publisher</label>
+            <label htmlFor="subcategory">subcategory</label>
               <input
                 type='text'
-                placeholder='Publisher of this Book'
-                name='publisher'
+                placeholder='subcategory of this Book'
+                name='subcategory'
                 className='form-control'
-                value={this.state.publisher}
+                value={this.state.subcategory}
+                onChange={this.onChange}
+              />
+            </div>
+
+            <div className='form-group'>
+            <label htmlFor="reviews">reviews</label>
+              <input
+                type='text'
+                placeholder='reviews of this Book'
+                name='reviews'
+                className='form-control'
+                value={this.state.reviews}
+                onChange={this.onChange}
+              />
+            </div>
+            <div className='form-group'>
+            <label htmlFor="releasedAt">releasedAt</label>
+              <input
+                type='text'
+                placeholder='releasedAt of this Book'
+                name='releasedAt'
+                className='form-control'
+                value={this.state.releasedAt}
                 onChange={this.onChange}
               />
             </div>
